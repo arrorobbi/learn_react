@@ -13,6 +13,7 @@ import InitiatorPage from './pages/intiator';
 import DuelistPage from './pages/duelist';
 import SentinelPage from './pages/sentinel';
 import ControllerPage from './pages/controller';
+import Gekko from './pages/geko';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route path='/valorant/sentinel' element={<SentinelPage/>} />
         <Route path='/valorant/duelist' element={<DuelistPage/>} />
         <Route path='/valorant/controller' element={<ControllerPage/>} />
+        <Route path='/valorant/gekko' element={<Gekko/>} />
     </Routes>
     </BrowserRouter>
   )

@@ -28,7 +28,6 @@ export default function SentinelPage() {
             result.push(data)
             }
         }))
-        console.log(result);
       setValorant(result);
     });
   }, []);

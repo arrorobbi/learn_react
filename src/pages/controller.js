@@ -28,7 +28,6 @@ export default function ControllerPage() {
             result.push(data)
             }
         }))
-        console.log(result);
       setValorant(result);
     });
   }, []);

@@ -9,30 +9,40 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 
-const limitDescription = (description, limit) => {
-  if (description.length <= limit) {
-    return description;
-  }
-  return description.substring(0, limit) + '...';
-};
-
-const link = (name) =>{
-  return `/valorant/${name}`
-}
-
-export default function InitiatorPageValorantPage() {
+export default function InitiatorPage() {
   const [valorant, setValorant] = useState([]);
   useEffect(() => {
     axios.get("https://staging.ina17.com/data.json").then((res) => {
-      setValorant(res.data);
+        const payload = res.data
+        let result = []
+        payload.map(((data,index) => {
+            if(data.displayName === "Gekko"){
+            result.push(data)
+            }
+        }))
+      setValorant(result);
     });
   }, []);
+
+  const [abilities, setAbilites] = useState([]);
+  useEffect(() => {
+    axios.get("https://staging.ina17.com/data.json").then((res) => {
+        const payload = res.data
+        payload.map(((data,index) => {
+            if(data.displayName === "Gekko"){
+              setAbilites(data.abilities);
+            }
+        }))
+    });
+  }, []);
+
+console.log(abilities);
 
 
   return (
         <Container>
           <Navbar expand="lg" className="bg-body-tertiary">
-          <Navbar.Brand href="/valorant">All Agent</Navbar.Brand>
+          <Navbar.Brand href="/valorant">Agent Role: Initiator</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
@@ -61,10 +71,10 @@ export default function InitiatorPageValorantPage() {
     {valorant.map((data,i) => (
     <Card 
     bg="#F9370D" 
-    style={{margin:'2.5px', width: '180px', textAlign:'center', color:'#FFFFFF', textDecorationColor:'black',backgroundColor:'#EA850B'}}
+    style={{margin:'2.5px', width: '400px', textAlign:'center', color:'#FFFFFF', textDecorationColor:'black',backgroundColor:'#EA850B'}}
     >
       <Col sm={100}>
-        <Link to={link(data.displayName)} style={{color:'#FFFFFF',textDecoration: 'none'}} >
+        <Link to='/' style={{color:'#FFFFFF',textDecoration: 'none'}} >
       <Card.Img variant="top" src={data.displayIcon} />
       <Card.Body>
         <Card.Header>
@@ -72,13 +82,37 @@ export default function InitiatorPageValorantPage() {
             <div key={i}>{data.displayName}</div>
         </Card.Title>
         </Card.Header>
-        <Card.Text>{limitDescription(data.description,100)}</Card.Text>
+        <Card.Text>{data.description}</Card.Text>
       </Card.Body>
         </Link>
       </Col>
       </Card>
         ))}
       </Row>
+        <Container>
+        <Row className="justify-content-md-center">
+        {abilities.map((data,i) => (
+        <Card 
+        bg="#F9370D" 
+        style={{margin:'2.5px', width: '400px', textAlign:'center', color:'#FFFFFF', textDecorationColor:'black',backgroundColor:'#EA850B'}}
+        >
+          <Col sm={100}>
+            <Link to='/' style={{color:'#FFFFFF',textDecoration: 'none'}} >
+          <Card.Img variant="top" src={data.displayIcon} />
+          <Card.Body>
+            <Card.Header>
+            <Card.Title>
+                <div key={i}>{data.displayName}</div>
+            </Card.Title>
+            </Card.Header>
+            <Card.Text>{data.description}</Card.Text>
+          </Card.Body>
+            </Link>
+          </Col>
+          </Card>
+            ))}
+        </Row>
+        </Container>
       </Container>
       
   )
