@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
-import Button from 'react-bootstrap/Button';
+import link from '../lib/link';
 import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
 
@@ -70,7 +70,7 @@ export default function SentinelPage() {
     style={{margin:'2.5px', width: '180px', textAlign:'center', color:'#FFFFFF', textDecorationColor:'black',backgroundColor:'#EA850B'}}
     >
       <Col sm={100}>
-        <Link to='/' style={{color:'#FFFFFF',textDecoration: 'none'}} >
+        <Link to={link(data.displayName)} style={{color:'#FFFFFF',textDecoration: 'none'}} >
       <Card.Img variant="top" src={data.displayIcon} />
       <Card.Body>
         <Card.Header>

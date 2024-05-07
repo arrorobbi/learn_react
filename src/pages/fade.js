@@ -6,19 +6,20 @@ import Navbar from 'react-bootstrap/Navbar';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import ListGroup from 'react-bootstrap/ListGroup';
 import { Link } from 'react-router-dom';
 import Ratio from 'react-bootstrap/Ratio';
 import embed from '../lib/embed';
 
 
-export default function GekkoPage() {
+export default function FadePage() {
   const [valorant, setValorant] = useState([]);
   useEffect(() => {
     axios.get("https://staging.ina17.com/data.json").then((res) => {
         const payload = res.data
         let result = []
         payload.map(((data,index) => {
-            if(data.displayName === "Gekko"){
+            if(data.displayName === "Fade"){
             result.push(data)
             }
         }))
@@ -31,7 +32,7 @@ export default function GekkoPage() {
     axios.get("https://staging.ina17.com/data.json").then((res) => {
         const payload = res.data
         payload.map(((data,index) => {
-            if(data.displayName === "Gekko"){
+            if(data.displayName === "Fade"){
               setAbilites(data.abilities);
             }
         }))
@@ -71,35 +72,35 @@ console.log(abilities);
 
     <Row className="justify-content-md-center">
     {valorant.map((data,i) => (
-      <Card 
-      bg="#F9370D" 
-      style={{margin:'2.5px', width: '800px', textAlign:'center', color:'#FFFFFF', textDecorationColor:'black',backgroundColor:'#EA850B'}}
-      >
-      
-      <Col sm={100}>
-      <div style={{ width: 780, height: 'auto' }}>
-      <Ratio aspectRatio="16x9">
-        <iframe 
-          title={data.displayName}
-          width="100%" 
-          height="100%" 
-          src={embed(data.video)} 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-          allowfullscreen>
-        </iframe>
-      </Ratio>
-    </div>
-      <Card.Body>
-        <Card.Header>
-        <Card.Title>
-            <div key={i}>{data.displayName}</div>
-        </Card.Title>
-        </Card.Header>
-        <Card.Text>{data.description}</Card.Text>
-      </Card.Body>
-      </Col>
-      </Card>
+    <Card 
+    bg="#F9370D" 
+    style={{margin:'2.5px', width: '800px', textAlign:'center', color:'#FFFFFF', textDecorationColor:'black',backgroundColor:'#EA850B'}}
+    >
+    
+    <Col sm={100}>
+    <div style={{ width: 780, height: 'auto' }}>
+    <Ratio aspectRatio="16x9">
+      <iframe 
+        title={data.displayName}
+        width="100%" 
+        height="100%" 
+        src={embed(data.video)} 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
+    </Ratio>
+  </div>
+    <Card.Body>
+      <Card.Header>
+      <Card.Title>
+          <div key={i}>{data.displayName}</div>
+      </Card.Title>
+      </Card.Header>
+      <Card.Text>{data.description}</Card.Text>
+    </Card.Body>
+    </Col>
+    </Card>
         ))}
       </Row>
         <Container>

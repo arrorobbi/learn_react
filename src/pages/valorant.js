@@ -6,8 +6,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
+import link from '../lib/link';
 import { Link } from 'react-router-dom';
+
 
 const limitDescription = (description, limit) => {
   if (description.length <= limit) {
@@ -15,10 +16,6 @@ const limitDescription = (description, limit) => {
   }
   return description.substring(0, limit) + '...';
 };
-
-const link = (name) =>{
-  return `/valorant/${name}`
-}
 
 export default function InitiatorPageValorantPage() {
   const [valorant, setValorant] = useState([]);
@@ -72,7 +69,7 @@ export default function InitiatorPageValorantPage() {
             <div key={i}>{data.displayName}</div>
         </Card.Title>
         </Card.Header>
-        <Card.Text>{limitDescription(data.description,100)}</Card.Text>
+        <Card.Text as="h9">{limitDescription(data.description,50)}</Card.Text>
       </Card.Body>
         </Link>
       </Col>

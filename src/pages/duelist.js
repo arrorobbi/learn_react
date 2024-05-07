@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import link from '../lib/link';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
@@ -36,7 +36,7 @@ export default function DuelistPage() {
 
 
   return (
-        <Container>
+    <Container>
           <Navbar expand="lg" className="bg-body-tertiary">
           <Navbar.Brand href="/valorant">Agent Role: Duelist</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -70,7 +70,7 @@ export default function DuelistPage() {
     style={{margin:'2.5px', width: '180px', textAlign:'center', color:'#FFFFFF', textDecorationColor:'black',backgroundColor:'#EA850B'}}
     >
       <Col sm={100}>
-        <Link to='/' style={{color:'#FFFFFF',textDecoration: 'none'}} >
+        <Link to={link(data.displayName)} style={{color:'#FFFFFF',textDecoration: 'none'}} >
       <Card.Img variant="top" src={data.displayIcon} />
       <Card.Body>
         <Card.Header>
