@@ -8,6 +8,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import link from '../lib/link';
 import { Link } from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+
 
 
 const limitDescription = (description, limit) => {
@@ -18,12 +21,40 @@ const limitDescription = (description, limit) => {
 };
 
 export default function InitiatorPageValorantPage() {
+  const [search, setSearch] = useState('');
+
+  // Handler function to update state when input changes
+  const handleSearch = (event) => {
+    setSearch(event.target.value);
+  };
+
   const [valorant, setValorant] = useState([]);
   useEffect(() => {
     axios.get("https://staging.ina17.com/data.json").then((res) => {
       setValorant(res.data);
     });
   }, []);
+
+  const find = (e) => {
+    let result = []
+    valorant.some((data => {
+      let name = data.displayName
+      const arrName = name.split("").sort()
+      const arrSearch = search.split("").sort().join()
+      const input = new RegExp(`^[${arrSearch}]$`)
+      const count = arrName.filter(n => input.test(n)).length
+       if(count >= 1) {
+         result.push(data)
+      }
+    }))
+    setValorant(result)
+      for(let data of result){
+        console.log(data.displayName);
+        if(data.displayName === search){
+          setValorant([data])
+        }
+      }
+  }
 
 
   return (
@@ -51,6 +82,15 @@ export default function InitiatorPageValorantPage() {
                 </Link>
                 </Nav.Link>
             </Nav>
+                <Form.Control
+                  type="text"
+                  id="search"
+                  value={search} // Set input value from state
+                  onChange={handleSearch} // Call handler function on change
+                />
+                <Form.Label htmlFor="text">
+                <Button type='submit' onClick={find} variant="info">Search</Button>{' '}
+                </Form.Label>
           </Navbar.Collapse>
       </Navbar>
 
