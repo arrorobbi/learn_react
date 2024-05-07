@@ -16,19 +16,30 @@ const limitDescription = (description, limit) => {
   return description.substring(0, limit) + '...';
 };
 
-export default function InitiatorPageValorantPage() {
+
+export default function InitiatorPage() {
   const [valorant, setValorant] = useState([]);
   useEffect(() => {
     axios.get("https://staging.ina17.com/data.json").then((res) => {
-      setValorant(res.data);
+        const payload = res.data
+        let result = []
+        payload.map(((data,index) => {
+            if(data.role === "Initiator"){
+            result.push(data)
+            }
+        }))
+        console.log(result);
+      setValorant(result);
     });
   }, []);
+
+
 
 
   return (
         <Container>
           <Navbar expand="lg" className="bg-body-tertiary">
-          <Navbar.Brand href="/valorant">All Agent</Navbar.Brand>
+          <Navbar.Brand href="/valorant">Agent Role: Initiator</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">

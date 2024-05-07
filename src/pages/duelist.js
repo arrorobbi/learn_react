@@ -4,9 +4,9 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 
 const limitDescription = (description, limit) => {
@@ -16,19 +16,30 @@ const limitDescription = (description, limit) => {
   return description.substring(0, limit) + '...';
 };
 
-export default function InitiatorPageValorantPage() {
+
+export default function DuelistPage() {
   const [valorant, setValorant] = useState([]);
   useEffect(() => {
     axios.get("https://staging.ina17.com/data.json").then((res) => {
-      setValorant(res.data);
+        const payload = res.data
+        let result = []
+        payload.map(((data,index) => {
+            if(data.role === "Duelist"){
+            result.push(data)
+            }
+        }))
+        console.log(result);
+      setValorant(result);
     });
   }, []);
+
+
 
 
   return (
         <Container>
           <Navbar expand="lg" className="bg-body-tertiary">
-          <Navbar.Brand href="/valorant">All Agent</Navbar.Brand>
+          <Navbar.Brand href="/valorant">Agent Role: Duelist</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">

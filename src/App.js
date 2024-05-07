@@ -9,6 +9,11 @@ import {
 import React from 'react'
 import HomePage from './pages/home';
 import ValorantPage from './pages/valorant';
+import InitiatorPage from './pages/intiator';
+import DuelistPage from './pages/duelist';
+import SentinelPage from './pages/sentinel';
+import ControllerPage from './pages/controller';
+
 
 function App() {
   return (
@@ -17,6 +22,10 @@ function App() {
     <Routes>
         <Route path='/' element={<HomePage/>} />
         <Route path='/valorant' element={<ValorantPage/>} />
+        <Route path='/valorant/initiator' element={<InitiatorPage/>} />
+        <Route path='/valorant/sentinel' element={<SentinelPage/>} />
+        <Route path='/valorant/duelist' element={<DuelistPage/>} />
+        <Route path='/valorant/controller' element={<ControllerPage/>} />
     </Routes>
     </BrowserRouter>
   )
